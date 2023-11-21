@@ -1,4 +1,4 @@
-// Default Variable
+// let playerName = 'Clank McKrank';
 let playerName = window.prompt("What is your robot's name?");
 let playerHealth = 100;
 let playerAttack = 10;
@@ -21,7 +21,7 @@ let fight = function() {
 
   // if player choses to fight, fight
   if (promptFight === "fight" || promptFight === "FIGHT") {
-    // remove enemy's health by subtracting the amount set in the playerAttack variable
+    // remove enemy's health by subtracting the amount set in the playerAttack letiable
     enemyHealth = enemyHealth - playerAttack;
     console.log(
       playerName + " attacked " + enemyName + ". " + enemyName + " now has " + enemyHealth + " health remaining."
@@ -34,7 +34,7 @@ let fight = function() {
       window.alert(enemyName + " still has " + enemyHealth + " health left.");
     }
 
-    // remove players's health by subtracting the amount set in the enemyAttack variable
+    // remove players's health by subtracting the amount set in the enemyAttack letiable
     playerHealth = playerHealth - enemyAttack;
     console.log(
       enemyName + " attacked " + playerName + ". " + playerName + " now has " + playerHealth + " health remaining."
@@ -49,7 +49,7 @@ let fight = function() {
     // if player choses to skip
   } else if (promptFight === "skip" || promptFight === "SKIP") {
     // confirm player wants to skip
-    var confirmSkip = window.confirm("Are you sure you'd like to quit?");
+    let confirmSkip = window.confirm("Are you sure you'd like to quit?");
 
     // if yes (true), leave fight
     if (confirmSkip) {
