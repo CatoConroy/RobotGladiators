@@ -7,7 +7,8 @@ let playerMoney = 10;
 // You can also log multiple values at once like this
 console.log(playerName, playerAttack, playerHealth);
 
-let enemyName = "Roborto";
+let enemyNames = ["Binary Brawler", "Byte Tyson", "Algorithm Assassin", "Firewall Fury"];
+console.log(enemyNames);
 let enemyHealth = 50;
 let enemyAttack = 12;
 
@@ -68,4 +69,4 @@ let fight = function() {
 }; // end of fight function
 
 // run fight function to start game
-fight();
+// fight();
