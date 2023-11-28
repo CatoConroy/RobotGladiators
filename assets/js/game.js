@@ -8,12 +8,25 @@ let playerMoney = 10;
 console.log(playerName, playerAttack, playerHealth);
 
 let enemyNames = ["Binary Brawler", "Byte Tyson", "Algorithm Assassin", "Firewall Fury"];
-console.log(enemyNames);
 let enemyHealth = 50;
 let enemyAttack = 12;
 
+
+// // Display Enemy Array
+//   for (let i = 0; i < enemyNames.length; i++) {
+//     console.log(enemyNames[i]);
+//     console.log(i);
+//     console.log(enemyNames[i] + " is at " + i + " index");
+//   }
+
+  // Game States
+  // "WIN" - Player robot has defeated all enemy-robots
+  //  *Fight all Enemy Robots
+
 // fight function
-let fight = function() {
+
+
+function fight(enemyName) {
   // Alert players that they are starting the round
   window.alert("Welcome to Robot Gladiators!");
 
@@ -58,6 +71,7 @@ let fight = function() {
       // subtract money from playerMoney for skipping
       playerMoney = playerMoney - 2;
     }
+
     // if no (false), ask question again by running fight() again
     else {
       fight();
@@ -66,7 +80,9 @@ let fight = function() {
   } else {
     window.alert("You need to pick a valid option. Try again!");
   }
-}; // end of fight function
+} // end of fight function
 
 // run fight function to start game
-// fight();
+for(var i = 0; i < enemyNames.length; i++) {
+  fight(enemyNames[i]);
+}
