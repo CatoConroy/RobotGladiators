@@ -1,3 +1,6 @@
+// Load CSS prior to script running
+if (!document.getElementById) document.write('<link rel="stylesheet" type="text/css" href="assets\css\style.css">');
+
 // let playerName = 'Clank McKrank';
 let playerName = window.prompt("What is your robot's name?");
 let playerHealth = 100;
@@ -94,7 +97,16 @@ for(let i = 0; i < enemyNames.length; i++) {
   
   // debugger;
   fight(pickedEnemyName);
-    ;
+
+  if (playerHealth > 0 && i < enemyNames.length - 1){
+    let storeConfirm = window.confirm("The fight is over, would you like to visit the shop before the next round?");
+
+    if (storeConfirm) {
+    shop ();
+    }
+  }
+  
+    
   }  
   
   else {
@@ -127,5 +139,52 @@ let endGame = function (){
   
 
 }
+
+let shop = function (){
+  let shopOptionPrompt = window.prompt (
+    "Would you like to REFILL your health, UPGRADE you attack, or LEAVE the store? Please enter one: 'REFILL', 'UPGRADE', or 'LEAVE' to make a choice."
+  );
+
+switch (shopOptionPrompt) {
+  case "REFILL":
+  case "refill":
+
+  if (playerMoney >= 7){
+
+    window.alert("Refilling player's health by 20 for 7 dollars.");
+
+    // Health Purchase
+    playerHealth = playerHealth +20;
+    playerMoney = playerMoney - 7;
+  }
+
+  else {
+    window.alert("You don't have enough money!");
+  }
+    break;
+  case "UPGRADE":
+  case "upgrade":
+
+  if (playerMoney >= 7){
+    window.alert("Upgrading player's attack by 6 for 7 dollars.");
+    playerAttack = playerAttack + 6;
+    playerMoney = playerMoney - 7;
+  }
+
+  else {
+    window.alert("You don't have enough money!");
+  }
+    break;
+  case "leave":
+  case "LEAVE":
+    window.alert("Leaving the Store.");
+    break;
+  default:
+    window.alert("You did not pick a valid option. Please try again.");
+    shop();
+    break;
+}
+
+};
 
 startGame();
