@@ -1,25 +1,29 @@
 // Load CSS prior to script running
 if (!document.getElementById) document.write('<link rel="stylesheet" type="text/css" href="assets\css\style.css">');
 
-// let playerName = 'Clank McKrank';
-let playerName = window.prompt("What is your robot's name?");
-let playerHealth = 100;
-let playerAttack = 10;
-let playerMoney = 10;
+// // let playerInfo.name = 'Clank McKrank';
+// let playerInfo.name = window.prompt("What is your robot's name?");
+// let playerInfo.health = 100;
+// let playerInfo.attack = 10;
+// let playerInfo.money = 10;
+
+
+
 
 // You can also log multiple values at once like this
-console.log(playerName, playerAttack, playerHealth);
 
-let enemyNames = ["Binary Brawler", "Byte Tyson", "Algorithm Assassin", "Firewall Fury"];
-let enemyHealth = 50;
-let enemyAttack = 12;
+// let enemy.names = ["", "", "", ""];
+// let enemy.health = 50;
+// let enemy.attack = 12;
+
+
 
 
 // // Display Enemy Array
-//   for (let i = 0; i < enemyNames.length; i++) {
-//     console.log(enemyNames[i]);
+//   for (let i = 0; i < enemy.names.length; i++) {
+//     console.log(enemy.names[i]);
 //     console.log(i);
-//     console.log(enemyNames[i] + " is at " + i + " index");
+//     console.log(enemy.names[i] + " is at " + i + " index");
 //   }
 
   // Game States
@@ -35,9 +39,69 @@ let randomNumber = function(min, max) {
   return value;
 };
 
+let playerInfo = {
+  name: window.prompt("What is your robot's name?"),
+  health: 100,
+  attack: 10,
+  money: 10,
 
-let fight = function(enemyName) {
-  while (playerHealth > 0 && enemyHealth > 0) {
+  reset: function() {
+    this.health = 100;
+    this.money = 10;
+    this.attack = 10;
+  },
+
+  refillHealth: function() {
+    if (this.money >= 7) {
+      window.alert("Refilling player's health by 20 for 7 dollars.");
+      this.health += 20;
+      this.money -= 7;
+    } 
+    else {
+      window.alert("You don't have enough money!");
+    }
+  },
+  upgradeAttack: function() {
+    if (this.money >= 7) {
+      window.alert("Upgrading player's attack by 6 for 7 dollars.");
+      this.attack += 6;
+      this.money -= 7;
+    } 
+    else {
+      window.alert("You don't have enough money!");
+    }
+  }
+};
+
+console.log(playerInfo.name, playerInfo.attack, playerInfo.health);
+
+
+
+let enemyInfo = [
+  {
+    name: "Binary Brawler",
+    attack: randomNumber(10, 14)
+  },
+  {
+    name: "Byte Tyson",
+    attack: randomNumber(10, 14)
+  },
+  {
+    name: "Algorithm Assassin",
+    attack: randomNumber(10, 14)
+  },
+  {
+    name: "Firewall Fury",
+    attack: randomNumber(10, 14)
+  }
+];
+
+
+let fight = function(enemy) {
+
+console.log(enemy);
+
+  while (playerInfo.health > 0 && enemy.health > 0) {
     //Ask player whether they would like to FIGHT or RUN
     let promptFight = window.prompt('Would you like to FIGHT or SKIP this battle? Enter "FIGHT" or "SKIP" to choose.');
     // If player picks "skip" confirm and then stop the loop
@@ -46,49 +110,49 @@ let fight = function(enemyName) {
       let confirmSkip = window.confirm("Are you sure you would like to skip this match?");
       // if yes, leave fight
       if (confirmSkip) {
-        window.alert(playerName + ' has decided to skip thigh fight. Goodbye!');
-        //subtract money from playerMoney for skipping
-        playerMoney = Math.max(0, playerMoney - 10);
-        console.log ("playerMoney", playerMoney);
+        window.alert(playerInfo.name + ' has decided to skip thigh fight. Goodbye!');
+        //subtract money from playerInfo.money for skipping
+        playerInfo.money = Math.max(0, playerInfo.money - 10);
+        console.log ("playerInfo.money", playerInfo.money);
         break;
       }
     }
 
-    let damageE = randomNumber(playerAttack -3, playerAttack);
+    let damageE = randomNumber(playerInfo.attack -3, playerInfo.attack);
 
-    enemyHealth = Math.max(0, enemyHealth - damageE);
+    enemy.health = Math.max(0, enemy.health - damageE);
     console.log(
-      playerName + ' attacked ' + enemyName + '. ' + enemyName + " now has " + enemyHealth + ' health remaining.'
+      playerInfo.name + ' attacked ' + enemy.name + '. ' + enemy.name + " now has " + enemy.health + ' health remaining.'
     );
 
  // check enemy's health
- if (enemyHealth <= 0) {
-  window.alert(enemyName + ' has died!');
+ if (enemy.health <= 0) {
+  window.alert(enemy.name + ' has died!');
 
   // award player money for winning
-  playerMoney = playerMoney + 20;
+  playerInfo.money = playerInfo.money + 20;
 
   // leave while() loop since enemy is dead
   break;
 } else {
-  window.alert(enemyName + ' still has ' + enemyHealth + ' health left.');
+  window.alert(enemy.name + ' still has ' + enemy.health + ' health left.');
 }
 
-     // remove players's health by subtracting the amount set in the enemyAttack variable
-     let damage = randomNumber(enemyAttack - 3, enemyAttack);
+     // remove players's health by subtracting the amount set in the enemy.attack variable
+     let damage = randomNumber(enemy.attack - 3, enemy.attack);
 
-     playerHealth = Math.max(0, playerHealth - damage);
+     playerInfo.health = Math.max(0, playerInfo.health - damage);
      console.log(
-       enemyName + ' attacked ' + playerName + '. ' + playerName + ' now has ' + playerHealth + ' health remaining.'
+       enemy.name + ' attacked ' + playerInfo.name + '. ' + playerInfo.name + ' now has ' + playerInfo.health + ' health remaining.'
      );
  
      // check player's health
-     if (playerHealth <= 0) {
-       window.alert(playerName + ' has died!');
+     if (playerInfo.health <= 0) {
+       window.alert(playerInfo.name + ' has died!');
        // leave while() loop if player is dead
        break;
      } else {
-       window.alert(playerName + ' still has ' + playerHealth + ' health left.');
+       window.alert(playerInfo.name + ' still has ' + playerInfo.health + ' health left.');
      }
 
   }
@@ -96,20 +160,24 @@ let fight = function(enemyName) {
 
 // run fight function to start game
 let startGame = function () {
-for(let i = 0; i < enemyNames.length; i++) {
 
-  if (playerHealth > 0) {
+// reset player stats at the beginning of a game.
+  playerInfo.reset();
+
+for(let i = 0; i < enemyInfo.length; i++) {
+
+  if (playerInfo.health > 0) {
     window.alert("Welcome to Robot Gladiators! Round " + ( i + 1 ))
 
-      let pickedEnemyName = enemyNames [i];
-      enemyHealth = randomNumber(40,60);
+      let pickedEnemyObj = enemyInfo[i];
+      pickedEnemyObj.health = randomNumber(40, 60);
 
  
   
   // debugger;
-  fight(pickedEnemyName);
+  fight(pickedEnemyObj);
 
-  if (playerHealth > 0 && i < enemyNames.length - 1){
+  if (playerInfo.health > 0 && i < enemyInfo.length - 1){
     let storeConfirm = window.confirm("The fight is over, would you like to visit the shop before the next round?");
 
     if (storeConfirm) {
@@ -132,8 +200,8 @@ for(let i = 0; i < enemyNames.length; i++) {
 
 let endGame = function (){
 
-  if (playerHealth > 0){
-    window.alert("Great job, you've survived the game! You now have a score of " + playerMoney + ".0");
+  if (playerInfo.health > 0){
+    window.alert("Great job, you've survived the game! You now have a score of " + playerInfo.money + ".0");
   }
   else {
     window.alert("You've lost your robot in battle.");
@@ -158,33 +226,13 @@ let shop = function (){
 
 switch (shopOptionPrompt) {
   case "REFILL":
-  case "refill":
-
-  if (playerMoney >= 7){
-
-    window.alert("Refilling player's health by 20 for 7 dollars.");
-
-    // Health Purchase
-    playerHealth = playerHealth +20;
-    playerMoney = playerMoney - 7;
-  }
-
-  else {
-    window.alert("You don't have enough money!");
-  }
-    break;
-  case "UPGRADE":
-  case "upgrade":
-
-  if (playerMoney >= 7){
-    window.alert("Upgrading player's attack by 6 for 7 dollars.");
-    playerAttack = playerAttack + 6;
-    playerMoney = playerMoney - 7;
-  }
-
-  else {
-    window.alert("You don't have enough money!");
-  }
+    case "refill":
+      playerInfo.refillHealth();
+      break;
+    case "UPGRADE":
+    case "upgrade":
+      playerInfo.upgradeAttack();
+      break;
     break;
   case "leave":
   case "LEAVE":
